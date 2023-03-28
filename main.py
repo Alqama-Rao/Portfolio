@@ -1,17 +1,49 @@
-from fastapi import FastAPI, Request
+# from fastapi import FastAPI, Request
+#
+# app = FastAPI()
+#
+# locations = []
+#
+# @app.post("/api/save-location")
+# async def save_location(request: Request):
+#     data = await request.json()
+#     locations.append(data)
+#     with open("locations.txt", "a") as f:
+#         f.write(f"{data['latitude']},{data['longitude']}\n")
+#     return {"success": True}
+#
+#
+# if __name__ == "__main__":
+#     app.run(debug=True)
 
-app = FastAPI()
 
-locations = []
 
-@app.post("/api/save-location")
-async def save_location(request: Request):
-    data = await request.json()
+from flask import Flask, request, jsonify
+import csv
+
+app = Flask(__name__)
+
+
+
+@app.route("/api/save-location", methods=["POST"])
+def save_location():
+
+    data = request.get_json()
+
+    # Read previous data from file
+    locations = []
+    with open("locations.csv", "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            locations.append({"latitude": float(row[0]), "longitude": float(row[1])})
+
     locations.append(data)
-    with open("locations.txt", "a") as f:
+    with open("locations.csv", "a") as f:
         f.write(f"{data['latitude']},{data['longitude']}\n")
-    return {"success": True}
-
+    with open("locations.csv", "a", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([data['latitude'], data['longitude']])
+    return jsonify(success=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
