@@ -10,9 +10,10 @@ def Default():
 
 @app.route("/api/save-location", methods=["POST"])
 def save_location():
-
+    print("Save location called")
     data = request.get_json()
 
+    print("Reading file data")
     # Load previous data from file
     try:
         with open("locations.txt", "r") as f:
@@ -22,6 +23,8 @@ def save_location():
 
     # Add new data to list
     locations.append([data["latitude"], data["longitude"]])
+
+    print("Writing data in file")
 
     # Write data to file
     with open("locations.txt", "w") as f:
