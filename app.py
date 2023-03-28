@@ -16,7 +16,7 @@ def save_location():
     print("Reading file data")
     # Load previous data from file
     try:
-        with open("locations.txt", "r") as f:
+        with open("/app/locations.txt", "r") as f:
             locations = [line.strip().split(",") for line in f.readlines()]
     except FileNotFoundError:
         locations = []
@@ -27,7 +27,7 @@ def save_location():
     print("Writing data in file")
 
     # Write data to file
-    with open("locations.txt", "w") as f:
+    with open("/app/locations.txt", "w") as f:
         for loc in locations:
             f.write(f"{loc[0]},{loc[1]}\n")
     import os
