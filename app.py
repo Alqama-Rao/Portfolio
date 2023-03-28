@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/api", methods=["GET"])
 def Default():
-    return "Hello Dear"
+    return "Hello Deer"
 
 
 @app.route("/api/save-location", methods=["POST"])
