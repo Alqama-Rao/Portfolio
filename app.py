@@ -4,6 +4,9 @@ import csv
 app = Flask(__name__)
 
 
+@app.route("/api", methods=["GET"])
+def Default():
+    return "Hello Dear"
 
 @app.route("/api/save-location", methods=["POST"])
 def save_location():
