@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import openpyxl
 
 app = Flask(__name__)
 
@@ -15,18 +14,19 @@ def save_location():
     data = request.get_json()
 
     # Load previous data from file
-    workbook = openpyxl.load_workbook("locations.xlsx")
-    worksheet = workbook.active
-    locations = []
-    for row in worksheet.iter_rows(values_only=True):
-        locations.append({"latitude": float(row[0]), "longitude": float(row[1])})
+    try:
+        with open("locations.txt", "r") as f:
+            locations = [line.strip().split(",") for line in f.readlines()]
+    except FileNotFoundError:
+        locations = []
 
     # Add new data to list
-    locations.append(data)
+    locations.append([data["latitude"], data["longitude"]])
 
     # Write data to file
-    worksheet.append([data["latitude"], data["longitude"]])
-    workbook.save("locations.xlsx")
+    with open("locations.txt", "w") as f:
+        for loc in locations:
+            f.write(f"{loc[0]},{loc[1]}\n")
     return jsonify(success=True)
 
 
