@@ -11,7 +11,6 @@ creds = Credentials.from_authorized_user_info(info={
 SPREADSHEET_ID = '1SEw29nHHIlDq149QW78HVtx5rzJCr-FRQn49HzntpOs'
 RANGE_NAME = 'Sheet1!A1:B'
 
-
 def write_to_sheet(values):
     print("Write to sheet")
     service = build('sheets', 'v4', credentials=creds)
