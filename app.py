@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 
 creds = None
 if os.path.exists('Credentials.json'):
-    creds = Credentials.from_authorized_user_file('credentials.json')
+    creds = Credentials.from_authorized_user_file('Credentials.json')
 
 # Define the spreadsheet ID and range to write data to
 SPREADSHEET_ID = '1SEw29nHHIlDq149QW78HVtx5rzJCr-FRQn49HzntpOs'
