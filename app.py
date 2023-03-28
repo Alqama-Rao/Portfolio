@@ -27,6 +27,9 @@ def save_location():
     with open("locations.txt", "w") as f:
         for loc in locations:
             f.write(f"{loc[0]},{loc[1]}\n")
+    import os
+    print(os.getcwd())
+
     return jsonify(success=True)
 
 
