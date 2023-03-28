@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 from flask import Flask, request, jsonify
 
 creds = None
-if os.path.exists('credentials.json'):
+if os.path.exists('Credentials.json'):
     creds = Credentials.from_authorized_user_file('credentials.json')
 
 # Define the spreadsheet ID and range to write data to
