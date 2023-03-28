@@ -10,10 +10,10 @@ def Default():
 
 @app.route("/api/save-location", methods=["POST"])
 def save_location():
-    app.logger.debug("Save location called")
+    app.logger.setLevel(logging.INFO)
     data = request.get_json()
 
-    app.logger.debug("Reading file data")
+    app.logger.setLevel(logging.INFO)
     # Load previous data from file
     try:
         with open("/app/locations.txt", "r") as f:
@@ -24,7 +24,7 @@ def save_location():
     # Add new data to list
     locations.append([data["latitude"], data["longitude"]])
 
-    app.logger.debug("Writing data in file")
+    app.logger.setLevel(logging.INFO)
     # Write data to file
     with open("/app/locations.txt", "w") as f:
         for loc in locations:
