@@ -1,3 +1,0 @@
-[build]
-  command = "python main.py"
-  publish = "."
