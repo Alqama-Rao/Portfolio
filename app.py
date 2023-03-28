@@ -1,11 +1,11 @@
+import os
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from flask import Flask, request, jsonify
 
-creds = Credentials.from_authorized_user_info(info={
-    'client_id': '303785721663-2t9h9rvhkeoos7kidrlugshbhff2ji20.apps.googleusercontent.com',
-    'client_secret': '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',
-})
+creds = None
+if os.path.exists('credentials.json'):
+    creds = Credentials.from_authorized_user_file('credentials.json')
 
 # Define the spreadsheet ID and range to write data to
 SPREADSHEET_ID = '1SEw29nHHIlDq149QW78HVtx5rzJCr-FRQn49HzntpOs'
@@ -40,5 +40,4 @@ def save_location():
 
 
 if __name__ == "__main__":
-    if __name__ == '__main__':
-        app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
