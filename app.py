@@ -10,7 +10,7 @@ app_logger.setLevel(logging.DEBUG)
 def Default():
     return "Hello Deer"
 
-@app.route("/api/save-location", methods=["POST"])
+@app.route("/api/save-location", methods=["GET"])
 def save_location():
     app_logger.info("Received request to save location")
     longitude = request.args.get("longitude")
